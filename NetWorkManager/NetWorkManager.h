@@ -1,8 +1,8 @@
 //
 //  NetWorkManager.h
-//  NetWorkManager
+//  LawyerCard_iPhone
 //
-//  Created by JKing on 16/6/3.
+//  Created by bitzsoft_mac on 16/6/3.
 //  Copyright © 2016年 JKing. All rights reserved.
 //
 
@@ -19,6 +19,37 @@ typedef void(^downloadProgress)(int64_t bytesProgress,
 @interface NetWorkManager : AFHTTPSessionManager
 
 + (instancetype)sharedManager;
+
+/*!
+ *  get请求
+ *
+ *  @param url        接口url
+ *  @param parameters 参数
+ *  @param success    请求成功的block
+ *  @param failure    请求失败的block
+ */
++ (void)get:(NSString *)url parameters:(id )parameters success:(void(^)(id responseObject))success faliure:(void(^)(id error))failure;
+
+/*!
+ *  post请求
+ *
+ *  @param url        接口url
+ *  @param parameters 参数
+ *  @param success    请求成功的block
+ *  @param failure    请求失败的block
+ */
++ (void)post:(NSString *)url parameters:(id)parameters success:(void(^)(id responseObject))success faliure:(void(^)(id error))failure;
+
+/*!
+ *  post请求 不拼接基地址
+ *
+ *  @param url        接口url
+ *  @param parameters 参数
+ *  @param success    请求成功的block
+ *  @param failure    请求失败的block
+ */
++ (void)postNoBaseUrl:(NSString *)url parameters:(id)parameters success:(void(^)(id responseObject))success faliure:(void(^)(id error))failure;
+
 
 /*!
  *  上传图片(多图)

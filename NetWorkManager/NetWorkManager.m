@@ -1,8 +1,8 @@
 //
 //  NetWorkManager.m
-//  NetWorkManager
+//  LawyerCard_iPhone
 //
-//  Created by JKing on 16/6/3.
+//  Created by bitzsoft_mac on 16/6/3.
 //  Copyright © 2016年 JKing. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 #import <AVFoundation/AVAssetExportSession.h>
 #import <AVFoundation/AVMediaFormat.h>
 
-static NSString * const BaseURLString = @"http://www.baidu.com";
+//static NSString * const BaseURLString = kBaseUrl;
 
 @implementation NetWorkManager
 
@@ -20,7 +20,8 @@ static NSString * const BaseURLString = @"http://www.baidu.com";
     static NetWorkManager *_sharedManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedManager = [[NetWorkManager alloc] initWithBaseURL:[NSURL URLWithString:BaseURLString]];
+//        _sharedManager = [[NetWorkManager alloc] initWithBaseURL:[NSURL URLWithString:BaseURLString]];
+        _sharedManager = [[NetWorkManager alloc] init];
         _sharedManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     });
     
@@ -31,7 +32,7 @@ static NSString * const BaseURLString = @"http://www.baidu.com";
 {
     if (self = [super initWithBaseURL:url]) {
         /*! 超时时间 */
-        self.requestSerializer.timeoutInterval = 10.0;
+        self.requestSerializer.timeoutInterval = 30.0;
         
         /*! 设置返回数据为json, 分别设置请求以及相应的序列化器 */
         self.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -50,6 +51,89 @@ static NSString * const BaseURLString = @"http://www.baidu.com";
     }
     return self;
 }
+
+/*!
+ *  get请求
+ *
+ *  @param url        接口url
+ *  @param parameters 参数
+ *  @param success    请求成功的block
+ *  @param failure    请求失败的block
+ */
++ (void)get:(NSString *)url parameters:(id )parameters success:(void(^)(id responseObject))success faliure:(void(^)(id error))failure
+{
+    [[NetWorkManager sharedManager] GET:[kBaseUrl stringByAppendingString:url] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if(responseObject)  {
+            
+            success(responseObject);
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        failure(error);
+        
+    }];
+}
+
+/*!
+ *  post请求
+ *
+ *  @param url        接口url
+ *  @param parameters 参数
+ *  @param success    请求成功的block
+ *  @param failure    请求失败的block
+ */
++ (void)post:(NSString *)url parameters:(id)parameters success:(void(^)(id responseObject))success faliure:(void(^)(id error))failure
+{
+    NSLog(@"%@", [kBaseUrl stringByAppendingString:url]);
+    [[NetWorkManager sharedManager] POST:[kBaseUrl stringByAppendingString:url] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if(responseObject)  {
+            
+            success(responseObject);
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        failure(error);
+        
+    }];
+}
+
+/*!
+ *  post请求 不拼接基地址
+ *
+ *  @param url        接口url
+ *  @param parameters 参数
+ *  @param success    请求成功的block
+ *  @param failure    请求失败的block
+ */
++ (void)postNoBaseUrl:(NSString *)url parameters:(id)parameters success:(void(^)(id responseObject))success faliure:(void(^)(id error))failure
+{
+    [[NetWorkManager sharedManager] POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if(responseObject)  {
+            
+            success(responseObject);
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        failure(error);
+        
+    }];
+}
+
 
 /**
  *  上传图片(多图)
@@ -75,7 +159,7 @@ static NSString * const BaseURLString = @"http://www.baidu.com";
 //    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    [[NetWorkManager sharedManager] POST:urlString parameters:operations constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [[NetWorkManager sharedManager] POST:[kBaseUrl stringByAppendingString:urlString] parameters:operations constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         NSUInteger i = 0;
         
@@ -248,7 +332,7 @@ static NSString * const BaseURLString = @"http://www.baidu.com";
         }
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         
-        JXLog(@"下载文件成功");
+        NSLog(@"下载文件成功");
         if (error == nil)
         {
             if (success)
