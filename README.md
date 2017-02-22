@@ -1,4 +1,4 @@
-# NetWorkManger
+# NetWorkManager
 A simple Network request tool base on AFNetWorking.
 
 #useage
