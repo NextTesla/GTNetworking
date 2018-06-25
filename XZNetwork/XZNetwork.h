@@ -1,16 +1,48 @@
-XZNetwork
-=========
+//
+//  XZNetwork.h
+//  LawyerCard_iPhone
+//
+//  Created by bitzsoft_mac on 16/6/3.
+//  Copyright © 2016年 JKing. All rights reserved.
+//
 
-![logo](https://i.loli.net/2018/06/25/5b30609088790.png)
+#import <UIKit/UIKit.h>
 
-## What
-A simple Network request tool based on AFNetWorking.
+typedef NS_ENUM(NSInteger, XZRequestMethod) {
+    XZRequestMethodGET = 0,
+    XZRequestMethodPOST,
+    XZRequestMethodHEAD,
+    XZRequestMethodPUT,
+    XZRequestMethodDELETE,
+    YTKRequestMethodPATCH
+};
 
-一个基于AFNetWorking的集约型网络请求封装.
+/// 请求成功block
+typedef void(^XZRequestSuccess)(id responseData);
+/// 请求失败block
+typedef void(^XZRequestFailed)(NSError *error);
+/// 上传、下载进度block
+typedef void(^XZRequestProgress)(NSProgress *progress);
 
-## Useage
+@interface XZNetwork : NSObject
 
- ```objc  
+/// 取消指定URL的网络请求
++ (void)cancelRequest:(NSString *)URLString;
+/// 取消所有网络请求
++ (void)cancelAllRequests;
+
+///**
+// *  发起请求
+// *
+// *  @param URLString  请求地址
+// *  @param parameters 请求参数
+// *  @param success    请求成功回调
+// *  @param failure    请求失败回调
+// *
+// *  @return 此次请求任务
+// */
+//+ (NSURLSessionTask *)request:(NSString *)URLString method:(XZRequestMethod)method parameters:(id)parameters success:(XZRequestSuccess)success faliure:(XZRequestFailed)failure;
+
 /**
  *  GET请求
  *
@@ -34,8 +66,9 @@ A simple Network request tool based on AFNetWorking.
  *  @return 此次请求任务
  */
 + (NSURLSessionTask *)POST:(NSString *)URLString parameters:(id)parameters success:(XZRequestSuccess)success faliure:(XZRequestFailed)failure;
-  
- /**
+
+
+/**
  *  上传图片
  *
  *  @param URLString      请求地址
@@ -60,7 +93,8 @@ A simple Network request tool based on AFNetWorking.
                            compressRatio:(CGFloat)compressRatio
                                 progress:(XZRequestProgress)progress
                                  success:(XZRequestSuccess)success
-                                 faliure:(XZRequestFailed)failure; 
+                                 faliure:(XZRequestFailed)failure;
+
 
 /**
  *  上传文件
@@ -99,5 +133,6 @@ A simple Network request tool based on AFNetWorking.
                                progress:(XZRequestProgress)progress
                                 success:(XZRequestSuccess)success
                                 faliure:(XZRequestFailed)failure;
-  
- ```
+
+
+@end
