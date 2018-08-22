@@ -1,7 +1,5 @@
-XZNetwork
+GTNetworking
 =========
-
-![logo](https://i.loli.net/2018/06/25/5b30609088790.png)
 
 ## What
 A simple Network request tool based on AFNetWorking.
@@ -10,7 +8,45 @@ A simple Network request tool based on AFNetWorking.
 
 ## Useage
 
- ```objc  
+```
+/**
+ *  获取当前baseUrl
+ */
++ (NSString *)baseUrl;
+
+/**
+ *  设置baseUrl
+ *
+ *  @param baseUrl AFNetworking的baseUrl
+ */
++ (void)configBaseUrl:(NSString *)baseUrl;
+
+/**
+ *  设置超时时间
+ *
+ *  @param timeout 超时时间 单位:秒
+ */
++ (void)setTimeout:(NSTimeInterval)timeout;
+
+/**
+ *  设置通用请求头 只需要配置一次即可
+ *
+ *  @param headers 请求头
+ */
++ (void)configCommonHttpHeader:(NSDictionary *)headers;
+
+/**
+ *  取消指定请求
+ *
+ *  @param url 请求的url
+ */
++ (void)cancelRequestWithURL:(NSString *)url;
+
+/**
+ *  取消所有请求
+ */
++ (void)cancelAllRequests;
+
 /**
  *  GET请求
  *
@@ -21,7 +57,8 @@ A simple Network request tool based on AFNetWorking.
  *
  *  @return 此次请求任务
  */
-+ (NSURLSessionTask *)GET:(NSString *)URLString parameters:(id)parameters success:(XZRequestSuccess)success faliure:(XZRequestFailed)failure;
++ (NSURLSessionTask *)GET:(NSString *)URLString parameters:(id)parameters success:(GTRequestSuccess)success faliure:(GTRequestFailure)failure;
+
 
 /**
  *  POST请求
@@ -33,9 +70,9 @@ A simple Network request tool based on AFNetWorking.
  *
  *  @return 此次请求任务
  */
-+ (NSURLSessionTask *)POST:(NSString *)URLString parameters:(id)parameters success:(XZRequestSuccess)success faliure:(XZRequestFailed)failure;
-  
- /**
++ (NSURLSessionTask *)POST:(NSString *)URLString parameters:(id)parameters success:(GTRequestSuccess)success faliure:(GTRequestFailure)failure;
+
+/**
  *  上传图片
  *
  *  @param URLString      请求地址
@@ -58,9 +95,10 @@ A simple Network request tool based on AFNetWorking.
                                fileNames:(NSArray *)fileNames
                                imageType:(NSString *)imageType
                            compressRatio:(CGFloat)compressRatio
-                                progress:(XZRequestProgress)progress
-                                 success:(XZRequestSuccess)success
-                                 faliure:(XZRequestFailed)failure; 
+                                progress:(GTRequestProgress)progress
+                                 success:(GTRequestSuccess)success
+                                 faliure:(GTRequestFailure)failure;
+
 
 /**
  *  上传文件
@@ -79,9 +117,10 @@ A simple Network request tool based on AFNetWorking.
                              parameters:(id)parameters
                                    name:(NSString *)name
                                filePath:(NSString *)filePath
-                               progress:(XZRequestProgress)progress
-                                success:(XZRequestSuccess)success
-                                faliure:(XZRequestFailed)failure;
+                               progress:(GTRequestProgress)progress
+                                success:(GTRequestSuccess)success
+                                faliure:(GTRequestFailure)failure;
+
 
 /**
  *  下载文件
@@ -96,8 +135,7 @@ A simple Network request tool based on AFNetWorking.
  */
 + (NSURLSessionTask *)uploadFileWithURL:(NSString *)URLString
                                storeDir:(NSString *)storeDir
-                               progress:(XZRequestProgress)progress
-                                success:(XZRequestSuccess)success
-                                faliure:(XZRequestFailed)failure;
-  
- ```
+                               progress:(GTRequestProgress)progress
+                                success:(GTRequestSuccess)success
+                                faliure:(GTRequestFailure)failure;
+```

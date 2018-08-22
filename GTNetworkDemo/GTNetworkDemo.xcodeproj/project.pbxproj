@@ -13,7 +13,6 @@
 		531220D4212CFE700018017F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 531220D3212CFE700018017F /* Assets.xcassets */; };
 		531220D7212CFE700018017F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 531220D5212CFE700018017F /* LaunchScreen.storyboard */; };
 		531220DA212CFE700018017F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 531220D9212CFE700018017F /* main.m */; };
-		531220E3212CFEC20018017F /* GTNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 531220E1212CFEC20018017F /* GTNetworking.m */; };
 		5312210B212D00830018017F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 531220E5212D00830018017F /* LICENSE */; };
 		5312210C212D00830018017F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 531220E6212D00830018017F /* README.md */; };
 		5312210D212D00830018017F /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 531220E8212D00830018017F /* UIProgressView+AFNetworking.m */; };
@@ -31,6 +30,7 @@
 		53122119212D00830018017F /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 53122105212D00830018017F /* AFURLRequestSerialization.m */; };
 		5312211A212D00830018017F /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53122107212D00830018017F /* AFNetworkReachabilityManager.m */; };
 		5312211B212D00830018017F /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 53122108212D00830018017F /* AFSecurityPolicy.m */; };
+		5312211F212D6A520018017F /* GTNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5312211E212D6A520018017F /* GTNetworking.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,8 +44,6 @@
 		531220D6212CFE700018017F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		531220D8212CFE700018017F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		531220D9212CFE700018017F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		531220E1212CFEC20018017F /* GTNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTNetworking.m; sourceTree = "<group>"; };
-		531220E2212CFEC20018017F /* GTNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTNetworking.h; sourceTree = "<group>"; };
 		531220E5212D00830018017F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		531220E6212D00830018017F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		531220E8212D00830018017F /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
@@ -82,6 +80,8 @@
 		53122108212D00830018017F /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		53122109212D00830018017F /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
 		5312210A212D00830018017F /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		5312211D212D6A520018017F /* GTNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTNetworking.h; sourceTree = "<group>"; };
+		5312211E212D6A520018017F /* GTNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTNetworking.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +114,7 @@
 		531220C9212CFE6F0018017F /* GTNetworkDemo */ = {
 			isa = PBXGroup;
 			children = (
-				531220E0212CFEC20018017F /* GTNetwork */,
+				5312211C212D6A520018017F /* GTNetworking */,
 				531220E4212D00830018017F /* AFNetworking */,
 				531220CA212CFE6F0018017F /* AppDelegate.h */,
 				531220CB212CFE6F0018017F /* AppDelegate.m */,
@@ -127,16 +127,6 @@
 				531220D9212CFE700018017F /* main.m */,
 			);
 			path = GTNetworkDemo;
-			sourceTree = "<group>";
-		};
-		531220E0212CFEC20018017F /* GTNetwork */ = {
-			isa = PBXGroup;
-			children = (
-				531220E2212CFEC20018017F /* GTNetworking.h */,
-				531220E1212CFEC20018017F /* GTNetworking.m */,
-			);
-			name = GTNetwork;
-			path = ../../GTNetwork;
 			sourceTree = "<group>";
 		};
 		531220E4212D00830018017F /* AFNetworking */ = {
@@ -197,6 +187,16 @@
 				53122104212D00830018017F /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		5312211C212D6A520018017F /* GTNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				5312211D212D6A520018017F /* GTNetworking.h */,
+				5312211E212D6A520018017F /* GTNetworking.m */,
+			);
+			name = GTNetworking;
+			path = ../../GTNetworking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,7 +284,7 @@
 				53122118212D00830018017F /* AFURLSessionManager.m in Sources */,
 				5312211A212D00830018017F /* AFNetworkReachabilityManager.m in Sources */,
 				53122112212D00830018017F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
-				531220E3212CFEC20018017F /* GTNetworking.m in Sources */,
+				5312211F212D6A520018017F /* GTNetworking.m in Sources */,
 				53122119212D00830018017F /* AFURLRequestSerialization.m in Sources */,
 				5312210F212D00830018017F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				53122117212D00830018017F /* AFHTTPSessionManager.m in Sources */,
