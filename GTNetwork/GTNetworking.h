@@ -1,47 +1,66 @@
 //
-//  XZNetwork.h
+//  GTNetworking.h
 //  LawyerCard_iPhone
 //
 //  Created by bitzsoft_mac on 16/6/3.
 //  Copyright © 2016年 JKing. All rights reserved.
 //
 
+/// 调试阶段进行打印，解决Xcode8以上控制台`打印不全`问题.
+#ifdef DEBUG
+#define GTLog(format,...) printf("%s",[[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String])
+#else
+#define GTLog(...) {}
+#endif
+
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, XZRequestMethod) {
-    XZRequestMethodGET = 0,
-    XZRequestMethodPOST,
-    XZRequestMethodHEAD,
-    XZRequestMethodPUT,
-    XZRequestMethodDELETE,
-    YTKRequestMethodPATCH
-};
-
 /// 请求成功block
-typedef void(^XZRequestSuccess)(id responseData);
+typedef void(^GTRequestSuccess)(id responseData);
 /// 请求失败block
-typedef void(^XZRequestFailed)(NSError *error);
+typedef void(^GTRequestFailure)(NSError *error);
 /// 上传、下载进度block
-typedef void(^XZRequestProgress)(NSProgress *progress);
+typedef void(^GTRequestProgress)(NSProgress *progress);
 
-@interface XZNetwork : NSObject
+@interface GTNetworking : NSObject
 
-/// 取消指定URL的网络请求
-+ (void)cancelRequest:(NSString *)URLString;
-/// 取消所有网络请求
+/**
+ *  baseUrl
+ */
++ (NSString *)baseUrl;
+
+/**
+ *  设置baseUrl
+ *
+ *  @param baseUrl AFNetworking的baseUrl
+ */
++ (void)configBaseUrl:(NSString *)baseUrl;
+
+/**
+ *  设置超时时间
+ *
+ *  @param timeout 超时时间 单位:秒
+ */
++ (void)setTimeout:(NSTimeInterval)timeout;
+
+/**
+ *  设置通用请求头 只需要配置一次即可
+ *
+ *  @param headers 请求头
+ */
++ (void)configCommonHttpHeader:(NSDictionary *)headers;
+
+/**
+ *  取消指定请求
+ *
+ *  @param url 请求的url
+ */
++ (void)cancelRequestWithURL:(NSString *)url;
+
+/**
+ *  取消所有请求
+ */
 + (void)cancelAllRequests;
-
-///**
-// *  发起请求
-// *
-// *  @param URLString  请求地址
-// *  @param parameters 请求参数
-// *  @param success    请求成功回调
-// *  @param failure    请求失败回调
-// *
-// *  @return 此次请求任务
-// */
-//+ (NSURLSessionTask *)request:(NSString *)URLString method:(XZRequestMethod)method parameters:(id)parameters success:(XZRequestSuccess)success faliure:(XZRequestFailed)failure;
 
 /**
  *  GET请求
@@ -53,7 +72,8 @@ typedef void(^XZRequestProgress)(NSProgress *progress);
  *
  *  @return 此次请求任务
  */
-+ (NSURLSessionTask *)GET:(NSString *)URLString parameters:(id)parameters success:(XZRequestSuccess)success faliure:(XZRequestFailed)failure;
++ (NSURLSessionTask *)GET:(NSString *)URLString parameters:(id)parameters success:(GTRequestSuccess)success faliure:(GTRequestFailure)failure;
+
 
 /**
  *  POST请求
@@ -65,8 +85,7 @@ typedef void(^XZRequestProgress)(NSProgress *progress);
  *
  *  @return 此次请求任务
  */
-+ (NSURLSessionTask *)POST:(NSString *)URLString parameters:(id)parameters success:(XZRequestSuccess)success faliure:(XZRequestFailed)failure;
-
++ (NSURLSessionTask *)POST:(NSString *)URLString parameters:(id)parameters success:(GTRequestSuccess)success faliure:(GTRequestFailure)failure;
 
 /**
  *  上传图片
@@ -91,9 +110,9 @@ typedef void(^XZRequestProgress)(NSProgress *progress);
                                fileNames:(NSArray *)fileNames
                                imageType:(NSString *)imageType
                            compressRatio:(CGFloat)compressRatio
-                                progress:(XZRequestProgress)progress
-                                 success:(XZRequestSuccess)success
-                                 faliure:(XZRequestFailed)failure;
+                                progress:(GTRequestProgress)progress
+                                 success:(GTRequestSuccess)success
+                                 faliure:(GTRequestFailure)failure;
 
 
 /**
@@ -113,9 +132,10 @@ typedef void(^XZRequestProgress)(NSProgress *progress);
                              parameters:(id)parameters
                                    name:(NSString *)name
                                filePath:(NSString *)filePath
-                               progress:(XZRequestProgress)progress
-                                success:(XZRequestSuccess)success
-                                faliure:(XZRequestFailed)failure;
+                               progress:(GTRequestProgress)progress
+                                success:(GTRequestSuccess)success
+                                faliure:(GTRequestFailure)failure;
+
 
 /**
  *  下载文件
@@ -130,9 +150,9 @@ typedef void(^XZRequestProgress)(NSProgress *progress);
  */
 + (NSURLSessionTask *)uploadFileWithURL:(NSString *)URLString
                                storeDir:(NSString *)storeDir
-                               progress:(XZRequestProgress)progress
-                                success:(XZRequestSuccess)success
-                                faliure:(XZRequestFailed)failure;
+                               progress:(GTRequestProgress)progress
+                                success:(GTRequestSuccess)success
+                                faliure:(GTRequestFailure)failure;
 
 
 @end

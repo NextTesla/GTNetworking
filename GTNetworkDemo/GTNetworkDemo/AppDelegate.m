@@ -1,9 +1,9 @@
 //
 //  AppDelegate.m
-//  XZNetworkDemo
+//  GTNetworkDemo
 //
-//  Created by law on 2018/6/25.
-//  Copyright © 2018年 XinZ. All rights reserved.
+//  Created by law on 2018/8/22.
+//  Copyright © 2018年 Goldx4. All rights reserved.
 //
 
 #import "AppDelegate.h"
