@@ -205,7 +205,7 @@ static NSMutableArray *gt_sessionTasks;
     return task;
 }
 
-+ (NSURLSessionTask *)uploadFileWithURL:(NSString *)URLString
++ (NSURLSessionTask *)downloadFileWithURL:(NSString *)URLString
                                storeDir:(NSString *)storeDir
                                progress:(GTRequestProgress)progress
                                 success:(GTRequestSuccess)success
