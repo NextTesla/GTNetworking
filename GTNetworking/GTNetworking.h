@@ -148,7 +148,7 @@ typedef void(^GTRequestProgress)(NSProgress *progress);
  *
  *  @return 此次请求任务
  */
-+ (NSURLSessionTask *)uploadFileWithURL:(NSString *)URLString
++ (NSURLSessionTask *)downloadFileWithURL:(NSString *)URLString
                                storeDir:(NSString *)storeDir
                                progress:(GTRequestProgress)progress
                                 success:(GTRequestSuccess)success
